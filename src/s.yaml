@@ -1,0 +1,65 @@
+edition: 1.0.0
+name: fc-pgvetor-llm
+access: default
+vars:
+  region: '{{ region }}'
+services:
+  cn-hangzhou-pgvector_llm-pgvector_llm:
+    component: devsapp/fc
+    props:
+      region: ${vars.region}
+      service:
+        logConfig:
+          enableRequestMetrics: true
+          enableInstanceMetrics: true
+          logBeginRule: DefaultRegex
+          project: aliyun-fc-cn-hangzhou-1fd466f6-8ec0-5b05-8f45-9e97b116848f
+          logstore: function-log
+        role: acs:ram::1443202110549604:role/AliyunFcDefaultRole
+        internetAccess: true
+        ossMountConfig:
+          mountPoints: []
+        name: pgvector_llm
+      function:
+        handler: index.handler
+        timeout: 120
+        diskSize: 512
+        caPort: 5001
+        instanceType: c1
+        runtime: custom-container
+        cpu: 4
+        customContainerConfig:
+          args: ''
+          accelerationType: Default
+          image: registry-vpc.cn-hangzhou.aliyuncs.com/pgvector/pgvector:0.0.2
+          command: ''
+          webServerMode: true
+        instanceConcurrency: 10
+        memorySize: 4096
+        environmentVariables:
+          CHATGLM_EMBEDDING_URL: >-
+            https://embeddi-service-rmq-com-chat-py-fhonrnfjqz.cn-hangzhou.fcapp.run
+          CHATGLM_BASE_URL: >-
+            http://chatglm.fc-langchain-chatglm.1740298130743624.cn-hangzhou.fc.devsapp.net
+          PGVECTOR_UNIQUE_KEY: llm_pg_test
+          PGVECTOR_API_URL: http://120.26.105.194:5002
+        name: pgvector_llm
+        asyncConfiguration: {}
+      triggers:
+        - name: defaultTrigger
+          description: ''
+          type: http
+          qualifier: LATEST
+          config:
+            methods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            authType: anonymous
+            disableURLInternet: false
+      customDomains:
+        - domainName: auto
+          protocol: HTTP
+          routeConfigs:
+            - path: /*

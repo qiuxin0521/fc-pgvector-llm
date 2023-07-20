@@ -1,0 +1,23 @@
+Type: Application
+Name: fc-pgvector-llm
+Provider:
+  - 阿里云
+Version: dev
+Description: 基于pgvector和chatglm-6b构建的智能AI助手，支持上传自定义语料和URL
+HomePage: https://github.com/qiuxin0521/fc-pgvector-llm
+Tags: #标签详情
+  - 部署函数
+Category: Web框架
+Parameters:
+  type: object
+  additionalProperties: false # 不允许增加其他属性
+  required: # 必填项
+    - region
+  properties:
+    region:
+      title: 地域
+      type: string
+      default:
+      description: 创建应用所在的地区
+      enum:
+        - cn-hangzhou'

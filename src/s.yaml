@@ -7,7 +7,7 @@ services:
   cn-hangzhou-pgvector_llm-pgvector_llm:
     component: devsapp/fc
     props:
-      region: ${vars.region}
+      region: cn-hangzhou
       service:
         logConfig:
           enableRequestMetrics: true

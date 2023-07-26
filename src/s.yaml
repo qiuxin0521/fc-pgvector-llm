@@ -31,11 +31,11 @@ services:
         customContainerConfig:
           args: ''
           accelerationType: Default
-          image: registry.cn-hangzhou.aliyuncs.com/pgvector_llm/pgvector_llm:0.0.4
+          image: registry.cn-hangzhou.aliyuncs.com/pgvector_llm/pgvector_llm:0.0.5
           command: ''
           webServerMode: true
         instanceConcurrency: 10
-        initializer: 'false'
+        initializer: 'true'
         initializationTimeout: 10
         memorySize: 4096
         environmentVariables:
@@ -44,7 +44,6 @@ services:
           CHATGLM_BASE_URL: >-
             http://chatglm.fc-langchain-chatglm.1740298130743624.cn-hangzhou.fc.devsapp.net
           PGVECTOR_API_URL: http://120.26.105.194:5002
-          PGVECTOR_UNIQUE_KEY: llm_pg_test
         name: pgvector_llm
         asyncConfiguration: {}
       triggers:

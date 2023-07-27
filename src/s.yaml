@@ -31,7 +31,7 @@ services:
         customContainerConfig:
           args: ''
           accelerationType: Default
-          image: registry.cn-hangzhou.aliyuncs.com/pgvector_llm/pgvector_llm:0.0.5
+          image: registry.cn-hangzhou.aliyuncs.com/pgvector_llm/pgvector_llm:0.0.6
           command: ''
           webServerMode: true
         instanceConcurrency: 10
@@ -43,7 +43,6 @@ services:
             https://embeddi-service-rmq-com-chat-py-fhonrnfjqz.cn-hangzhou.fcapp.run
           CHATGLM_BASE_URL: >-
             http://chatglm.fc-langchain-chatglm.1740298130743624.cn-hangzhou.fc.devsapp.net
-          PGVECTOR_API_URL: http://120.26.105.194:5002
         name: pgvector_llm
         asyncConfiguration: {}
       triggers:
